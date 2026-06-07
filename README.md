@@ -77,13 +77,13 @@ net stop MySQL57
 如果 Redis 没有配置为服务，可手动启动：
 
 ```powershell
-& "D:\Docker\Docker\Redis\redis-server.exe"
+& "<Redis安装目录>\redis-server.exe"
 ```
 
 如需带配置文件启动：
 
 ```powershell
-& "D:\Docker\Docker\Redis\redis-server.exe" "D:\Docker\Docker\Redis\redis.windows.conf"
+& "<Redis安装目录>\redis-server.exe" "<Redis安装目录>\redis.windows.conf"
 ```
 
 ### 3. 在 IDEA 中运行项目
@@ -91,7 +91,7 @@ net stop MySQL57
 使用 IntelliJ IDEA 打开项目根目录：
 
 ```text
-C:\Users\lwqing\Desktop\springboot-demo
+<项目根目录>
 ```
 
 找到启动类：
