@@ -77,13 +77,13 @@ net stop MySQL57
 如果 Redis 没有配置为服务，可手动启动：
 
 ```powershell
-& "<Redis安装目录>\redis-server.exe"
+& "D:\Docker\Docker\Redis\redis-server.exe"
 ```
 
 如需带配置文件启动：
 
 ```powershell
-& "<Redis安装目录>\redis-server.exe" "<Redis安装目录>\redis.windows.conf"
+& "D:\Docker\Docker\Redis\redis-server.exe" "D:\Docker\Docker\Redis\redis.windows.conf"
 ```
 
 ### 3. 在 IDEA 中运行项目
