@@ -125,6 +125,180 @@ src/main/resources/sql/init.sql
 
 可在 MySQL 中执行该脚本完成建表和初始化数据。
 
+
+## 5. 项目结构说明
+
+本项目采用标准的 Spring Boot 分层架构，整体结构清晰，便于后续维护和扩展。主要分为启动层、控制层、业务层、持久层、实体层、配置层以及数据库初始化脚本等部分。
+
+### 5.1 启动类
+
+启动类位于：
+
+```text
+src/main/java/com/demo/SpringbootDemoApplication.java
+```
+
+该类是整个项目的入口类，负责启动 Spring Boot 应用。项目运行时会先加载该启动类，并初始化 Spring 容器、内嵌 Tomcat、MyBatis、Redis 等相关组件。
+
+**作用说明：**
+
+- 作为 Spring Boot 程序入口
+- 启动整个后端服务
+- 完成自动配置与组件扫描
+
+---
+
+### 5.2 Controller 层
+
+控制层位于：
+
+```text
+src/main/java/com/demo/controller/UserController.java
+```
+
+Controller 层主要负责接收前端请求，定义 RESTful 风格接口，并将请求参数传递给 Service 层处理。本项目中的用户相关接口，包括查询、新增、修改、删除，以及 Redis 相关接口，均在该层统一对外提供。
+
+**作用说明：**
+
+- 接收前端请求
+- 处理请求参数
+- 返回统一格式的响应结果
+- 不直接编写复杂业务逻辑
+
+**接口示例：**
+
+- 查询用户
+- 查询用户列表
+- 新增用户
+- 修改用户
+- 删除用户
+- MySQL 写入 Redis
+- 从 Redis 读取数据
+
+**设计原因：**
+
+Controller 是 Web 层的入口，主要负责请求分发和参数接收，便于接口管理和后续扩展。
+
+---
+
+### 5.3 Service 层
+
+业务逻辑层位于：
+
+```text
+src/main/java/com/demo/service/UserService.java
+```
+
+Service 层主要负责具体的业务处理逻辑，是 Controller 和 Mapper 之间的桥梁。在本项目中，Service 层负责调用 Mapper 层访问数据库，同时处理 Redis 缓存相关逻辑，例如读取 MySQL 数据后写入 Redis，或者直接从 Redis 中读取缓存数据。
+
+**作用说明：**
+
+- 编写核心业务逻辑
+- 调用数据库访问层
+- 处理缓存读写逻辑
+- 保持 Controller 层简洁
+
+**设计优势：**
+
+- 分层清晰
+- 可读性高
+- 后期维护和扩展方便
+
+---
+
+### 5.4 Mapper 层
+
+持久层位于：
+
+```text
+src/main/java/com/demo/mapper/UserMapper.java
+```
+
+Mapper 层主要负责与数据库进行交互，MyBatis 会通过该接口执行 SQL 语句，实现对用户表的增删改查操作。
+
+**作用说明：**
+
+- 执行数据库相关 SQL
+- 完成用户数据查询与持久化
+- 与 MySQL 直接交互
+
+**设计原因：**
+
+使用 MyBatis 可以让 SQL 与 Java 代码分离，SQL 更加清晰可控，相比直接编写 JDBC 代码更容易维护，也更适合课程项目演示。
+
+---
+
+### 5.5 实体类
+
+实体类位于：
+
+```text
+src/main/java/com/demo/entity/User.java
+```
+
+实体类用于封装用户信息，并与数据库中的用户表字段进行映射。项目中查询到的数据会转换为 `User` 对象，方便在 Java 代码中进行操作和传递。
+
+**作用说明：**
+
+- 封装用户数据
+- 对应数据库表结构
+- 便于对象和数据库数据之间的转换
+
+**常见字段：**
+
+- id
+- username
+- password
+- nickname
+- email
+- status
+
+---
+
+### 5.6 配置文件
+
+项目配置文件位于：
+
+```text
+src/main/resources/application.yml
+```
+
+该文件用于配置项目运行所需的基础信息，包括数据库连接、Redis 连接、服务端口以及 MyBatis 配置等。
+
+**主要配置内容：**
+
+- 服务器端口
+- MySQL 数据源
+- Redis 连接地址和端口
+- MyBatis 配置
+- 日志输出配置
+
+**作用说明：**
+
+- 管理项目运行环境
+- 连接数据库和缓存服务
+- 提供统一配置入口
+
+---
+
+### 5.7 SQL 初始化脚本
+
+数据库初始化脚本位于：
+
+```text
+src/main/resources/sql/init.sql
+```
+
+该文件用于数据库建表和初始化数据，方便快速部署项目环境。在实际使用时，可以先在 MySQL 中执行该脚本，完成用户表的创建以及测试数据的插入。
+
+**执行方式：**
+
+如果在 MySQL 客户端中执行，可以使用：
+
+```sql
+source src/main/resources/sql/init.sql
+```
+
 ## 接口测试示例
 
 ### 查询所有用户
@@ -246,6 +420,6 @@ springboot-demo/
 5. Redis 读取缓存
 6. 使用 Postman / Apifox 完成接口验证
 
-## 作者
+## lwqing
 
-个人课程作业 / Spring Boot 后端 Demo
+个人项目demo / Spring Boot 后端 Demo
