@@ -1,6 +1,6 @@
 # Spring Boot Demo
 
-一个基于 **Spring Boot 2.7.x + MyBatis + MySQL + Redis** 的后端小 Demo，采用前后端分离思想，仅提供 RESTful 接口，不包含前端页面。
+一个基于 **Spring Boot 2.7.18 + MyBatis + MySQL + Redis** 的后端小 Demo，采用前后端分离思想，仅提供 RESTful 接口，不包含前端页面。
 
 ## 项目简介
 
