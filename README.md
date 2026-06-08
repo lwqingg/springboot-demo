@@ -91,13 +91,13 @@ net stop MySQL57
 使用 IntelliJ IDEA 打开项目根目录：
 
 ```text
-<项目根目录>
+springboot-demo
 ```
 
 找到启动类：
 
 ```text
-src/main/java/com/demo/SpringbootDemoApplication.java
+src/main/java/com.demo/SpringbootDemoApplication.java
 ```
 
 点击运行即可。
